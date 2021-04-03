@@ -5,7 +5,7 @@ import '@polymer/paper-input/paper-input.js';
 
 
 /**
- * `hola-codigofacilito`
+ * `hola-codigo`
  * Muestra un mensaje de hola mundo
  *
  * @customElement
@@ -13,7 +13,7 @@ import '@polymer/paper-input/paper-input.js';
  * @demo demo/index.html
  */
 
- class NombreCodigofacilito extends PolymerElement {
+ class NombreCodigo extends PolymerElement {
   static get properties() {
     return {
       name:{
@@ -49,9 +49,9 @@ import '@polymer/paper-input/paper-input.js';
     }
 }
 
-window.customElements.define('nombre-codigofacilito', NombreCodigofacilito);
+window.customElements.define('nombre-codigo', NombreCodigo);
 
-class HolaCodigofacilito extends PolymerElement {
+class HolaCodigo extends PolymerElement {
   static get properties() {
     return {
       name:{
@@ -81,7 +81,7 @@ class HolaCodigofacilito extends PolymerElement {
           border: 1 #ccc solid;
         }
       </style>
-      <nombre-codigofacilito name="{{name}}"></nombre-codigofacilito>
+      <nombre-codigo name="{{name}}"></nombre-codigo>
       <h2>Hello [[prop1]]!</h2>
     `;
   }
@@ -129,4 +129,4 @@ class HolaCodigofacilito extends PolymerElement {
   }
 }
 
-window.customElements.define('hola-codigofacilito', HolaCodigofacilito);
+window.customElements.define('hola-codigo', HolaCodigo);
