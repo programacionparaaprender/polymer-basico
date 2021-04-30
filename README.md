@@ -72,5 +72,11 @@ npm install --save @polymer/paper-input
 se crea clase hijo
 NombreCodigofacilito
 
+### 8.- Curso Polymer - Polymer elements
+npm install --save @polymer/paper-button
+npm install --save @polymer/paper-card
+
+### 9.- Curso Polymer - Eventos y listeners
+ejecutar funciones del padre en el hijo
 
 localhost:8081

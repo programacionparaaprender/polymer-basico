@@ -2,8 +2,8 @@ import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 
 
 import '@polymer/paper-input/paper-input.js';
-
-
+import '@polymer/paper-button/paper-button.js';
+import '@polymer/paper-card/paper-card.js';
 /**
  * `hola-codigo`
  * Muestra un mensaje de hola mundo
@@ -13,9 +13,12 @@ import '@polymer/paper-input/paper-input.js';
  * @demo demo/index.html
  */
 
+//hijo
  class NombreCodigo extends PolymerElement {
   static get properties() {
     return {
+      clickHijo: Function,
+        
       name:{
         type: String,
         value: 'Martin Gonzales',
@@ -27,30 +30,40 @@ import '@polymer/paper-input/paper-input.js';
     };
   }
   static get template() { return html`
-  <style>
-  :host{
-      display: block;
+      <style>
+      :host{
+          display: block;
+      }
+    </style>
+    <button type="button" on-click="clickHijo">Boton hijo</button>
+    <paper-input label="Nombre" value="{{name}}" on-click="clickio"></paper-input>
+    <h1 id="titulo">Hola [[name]], tengo [[edad]]</h1>`
   }
-</style>
-<paper-input label="Nombre" value="{{name}}"></paper-input>
-<h1 id="titulo">Hola [[name]], tengo [[edad]]</h1>`
-    }
 
-    ready() {
+  clickio(){
+    
+  }
+
+  ready() {
       super.ready();
-      console.log('el elemento se creo en nombre-codigo');
-      console.log(this.$.titulo);
-      setTimeout(()=>{
+      //console.log('el elemento se creo en nombre-codigo');
+      //console.log(this.$.titulo);
+      
+
+
+      /* setTimeout(()=>{
         this.name = "Uno nuevo"
         console.log("se cambio")
-      }, 3000); 
+      }, 3000);  */
+
       //this.$.name.textContent = this.tagName;
   
-    }
+  }
 }
 
 window.customElements.define('nombre-codigo', NombreCodigo);
 
+//padre
 class HolaCodigo extends PolymerElement {
   static get properties() {
     return {
@@ -80,9 +93,21 @@ class HolaCodigo extends PolymerElement {
           color:white;
           border: 1 #ccc solid;
         }
+        paper-button{
+          background-color: var(--paper-red-500);
+          color:white;
+        }
       </style>
-      <nombre-codigo name="{{name}}"></nombre-codigo>
-      <h2>Hello [[prop1]]!</h2>
+      <paper-card heading="Crear Cuenta" image="" elevation="1" animated-shadow="false">
+        <div class="card-content">
+          <nombre-codigo id="componenteHijo" name="{{name}}" clickHijo="clickHijo"></nombre-codigo>
+          <h2>Hello [[prop1]]!</h2>
+        </div>
+        <div class="card-actions">
+          <paper-button  raised on-click="click"> Boton </paper-button>
+        </div>
+      </paper-card>
+      
     `;
   }
   static get properties() {
@@ -100,6 +125,12 @@ class HolaCodigo extends PolymerElement {
       },
     };
   }
+  clickHijo(){
+    alert("Dio clic en el hijo")
+  }
+  /* static get listeners(){
+    namechanged:"click"
+  } */
   //attached no funciona
   attached(){
     console.log('attached')
@@ -118,6 +149,15 @@ class HolaCodigo extends PolymerElement {
   //ready si funciona
   ready() {
     super.ready();
+    this.$.componenteHijo.addEventListener("namechanged",()=>this.click());
+    //document.querySelector('nombre-codigo').addEventListener('namechange',()=>this.click());
+    //this.$$("nombre-codigo").addEventListener("namechange",()=>this.click());
+    
+
+    //this.$.boton.addEventListener("click",()=>this.click());
+    
+    //this.$$("paper-button").addEventListener("click",()=>this.click());
+    
     //console.log('el elemento se creo');
     //console.log(this.$.titulo);
     /* setTimeout(()=>{
@@ -126,6 +166,9 @@ class HolaCodigo extends PolymerElement {
     }, 3000); */
     //this.$.name.textContent = this.tagName;
 
+  }
+  click(){
+    this.name = "Hubo un clic";
   }
 }
 
